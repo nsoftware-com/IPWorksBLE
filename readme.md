@@ -5,14 +5,9 @@ The provided sample projects offer a concise yet effective demonstration of the 
 IPWorks BLE 2022 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksble](https://www.nsoftware.com/ipworksble)
 
 ## Reference Documentation
-* [Java Edition](https://cdn.nsoftware.com/help/ILH/java/)
-* [Javascript Edition](https://cdn.nsoftware.com/help/ILH/js/)
 * [.NET Edition](https://cdn.nsoftware.com/help/ILH/cs/)
-* [Python Edition](https://cdn.nsoftware.com/help/ILH/py/)
-* [PHP Edition](https://cdn.nsoftware.com/help/ILH/php/)
 * [C++ Edition](https://cdn.nsoftware.com/help/ILH/cpp/)
-* [macOS Edition](https://cdn.nsoftware.com/help/ILH/mac/)
-* [iOS Edition](https://cdn.nsoftware.com/help/ILH/mac/)
+* [Delphi Edition](https://cdn.nsoftware.com/help/ILH/dlp/)
 
 ## Sample Projects
 | Sample Project | Description |
