@@ -2,12 +2,12 @@
 The provided sample projects offer a concise yet effective demonstration of the components from IPWorks BLE, showcasing their usage in a straightforward manner. While they are not intended to be complete applications, they serve as valuable illustrations of key features. To enhance clarity, error handling and checks are simplified, allowing users to focus on the core functionality.
 
 ## Requirements
-IPWorks BLE 2022 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksble](https://www.nsoftware.com/ipworksble)
+IPWorks BLE 2024 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksble](https://www.nsoftware.com/ipworksble)
 
 ## Reference Documentation
-* [.NET Edition](https://cdn.nsoftware.com/help/ILH/cs/)
-* [C++ Edition](https://cdn.nsoftware.com/help/ILH/cpp/)
-* [Delphi Edition](https://cdn.nsoftware.com/help/ILH/dlp/)
+* [.NET Edition](https://cdn.nsoftware.com/help/ILJ/cs/)
+* [C++ Edition](https://cdn.nsoftware.com/help/ILJ/cpp/)
+* [Delphi Edition](https://cdn.nsoftware.com/help/ILJ/dlp/)
 
 ## Sample Projects
 | Sample Project | Description |
