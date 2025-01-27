@@ -1,5 +1,5 @@
 #
-# IPWorks BLE 2024 .NET Edition - Sample Project
+# IPWorks BLE 2024 C++ Edition - Sample Project
 #
 # This sample project demonstrates the usage of IPWorks BLE in a 
 # simple, straightforward way. It is not intended to be a complete 
@@ -16,8 +16,8 @@ ifeq ($(shell uname -s), Darwin) # MACOS
 R_PATH=-Wl,-rpath,../../lib64/,-rpath,.
 
 FRAMEWORK = -framework Carbon -framework Security
-LD_FLAGS = -lipworksble.24.0 -L../../lib64/ -lresolv
-LD_FLAGS_SRC = -lz -lresolv
+LD_FLAGS = -lipworksble.24.0 -L../../lib64/ CoreBluetooth.framework
+LD_FLAGS_SRC = -lz CoreBluetooth.framework
 OS_CFLAGS = -D UNIX -arch arm64
 MACOS = "darwin% Darwin% macos%"
 
@@ -31,18 +31,21 @@ src: ../../src/ipworksble.o
 	g++ -c -fno-exceptions -fno-rtti -fPIC -arch arm64 -o ../../src/ipworksble.o ../../src/ipworksble.cpp
 
 else # LINUX
-ifeq ($(shell uname -m), x86_64)
-  LIB=lib64
-else
+CPU=$(shell uname -m)
+# It's assumed that a product is always built for Linux/x64 platform
+ifeq ($(CPU), $(filter $(CPU), i386 i686))
   LIB=lib
+endif
+ifeq ($(LIB),)
+  LIB=lib64
 endif
 
 R_PATH=-Wl,-rpath,../../$(LIB)/,-rpath,.
-LD_FLAGS = -lipworksble  -L../../$(LIB)/ 
-LD_FLAGS_SRC = -lz 
+LD_FLAGS = -lipworksble -ldbus-1 -L../../$(LIB)/ -ldbus-1
+LD_FLAGS_SRC = -lz -ldbus-1
 
 all:
-	g++ -D UNIX -o bleclient bleclient.cpp  -I../../include/ $(LD_FLAGS) $(R_PATH) 
+	g++ -D UNIX  -o bleclient bleclient.cpp  -I../../include/ $(LD_FLAGS) $(R_PATH)
 
 src: ../../src/ipworksble.o
 	g++ -D UNIX -o bleclient ../../src/ipworksble.o bleclient.cpp  -I../../include/ $(LD_FLAGS_SRC)

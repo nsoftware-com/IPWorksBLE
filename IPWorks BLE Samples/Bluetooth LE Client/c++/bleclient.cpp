@@ -19,6 +19,7 @@
  *
  *  a) C/C++  -  General  -  Consume Windows Runtime Extension  -   Yes(/ZW)
  *  b) C/C++  -  General  -  Additional #using Directories  -  "$(WindowsSdkDir_10)\UnionMetadata\10.0.15063.0;$(VSAPPIDDIR)\VC\vcpackages"
+ *     ** Note that the version number (10.0.15063.0) may need to be updated to match the Windows Runtime library installed on your machine.
  *  c) C/C++  -  Code Generation  -  Enable Minimal Rebuild  -  No (/GM-)
  *
  *  Further, a threading model must be specified for the entry point, typically the "main" method. Here are a few examples:
@@ -31,6 +32,20 @@
  *    ...
  *  int main(Platform::Array<Platform::String^>^ args)
  */
+
+#ifdef UNIX
+#define strcpy_s strcpy
+
+#include <stdint.h>
+#include <time.h>
+
+uint64_t GetTickCount() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return static_cast<uint64_t>(ts.tv_sec) * 1000 + ts.tv_nsec / 1000000;
+}
+
+#endif // UNIX
 
 #include <stdio.h>
 #include <string.h>
@@ -100,10 +115,18 @@ void PrintValue(char* value, int format) {
   // As types like int and char can be system-dependent, this formatting may not work for every system.
   switch (format) {
   case 4:
+#ifdef UNIX
+    printf("Format: VF_UINT_8 | Value: %hhu\r\n", *(uint8_t*)(value));
+#else
     printf("Format: VF_UINT_8 | Value: %hhu\r\n", *(uint8*)(value));
+#endif // UNIX
     break;
   case 6:
+#ifdef UNIX
+    printf("Format: VF_UINT_16 | Value: %hhu\r\n", *(uint16_t*)(value));
+#else
     printf("Format: VF_UINT_16 | Value: %hhu\r\n", *(uint16*)(value));
+#endif // UNIX
     break;
   default:
     printf("Format Undefined. Interpretting as string. | Value: %s\r\n", value);
@@ -116,7 +139,9 @@ bool HasFlag(int flags, int flag) {
   return (flags & flag) == flag;
 }
 
+#ifndef UNIX
 [Platform::MTAThread]
+#endif // !UNIX
 int main(int argc, char* argv[]) {
   // Declare/Initialize
   int ret_code = 0;
@@ -126,6 +151,7 @@ int main(int argc, char* argv[]) {
   char serviceId[LINE_LEN];
   char *charId;
   int charIndex = 0;
+  int flags = 0;
 
   unsigned long endCount = GetTickCount() + 2 * 1000;
 
@@ -191,7 +217,7 @@ int main(int argc, char* argv[]) {
   // Display information about the selected characteristic
   printf("Characteristic Information:\r\n");
   printf("ServiceId: %s\r\n", serviceId);
-  int flags = bleclient.GetCharacteristicFlags(charIndex); // Get flags to know what we can do with the characteristic.
+  flags = bleclient.GetCharacteristicFlags(charIndex); // Get flags to know what we can do with the characteristic.
   if (HasFlag(flags, CHAR_FLAG_READ)) {
     char * value;
     int * lenValue = 0;
@@ -223,7 +249,4 @@ endofprogram:
   bleclient.Disconnect();
   return ret_code;
 }
- 
- 
- 
 

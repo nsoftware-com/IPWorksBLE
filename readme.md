@@ -5,9 +5,12 @@ The provided sample projects offer a concise yet effective demonstration of the 
 IPWorks BLE 2024 libraries for the corresponding edition are required to run these samples.  Free download from: [https://www.nsoftware.com/ipworksble](https://www.nsoftware.com/ipworksble)
 
 ## Reference Documentation
+* [Java Edition](https://cdn.nsoftware.com/help/ILJ/java/)
 * [.NET Edition](https://cdn.nsoftware.com/help/ILJ/cs/)
 * [C++ Edition](https://cdn.nsoftware.com/help/ILJ/cpp/)
 * [Delphi Edition](https://cdn.nsoftware.com/help/ILJ/dlp/)
+* [macOS Edition](https://cdn.nsoftware.com/help/ILJ/mac/)
+* [iOS Edition](https://cdn.nsoftware.com/help/ILJ/mac/)
 
 ## Sample Projects
 | Sample Project | Description |

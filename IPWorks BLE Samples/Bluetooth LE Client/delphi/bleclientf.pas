@@ -279,7 +279,7 @@ begin
   if tvGATTObjectsTree.Selected.Level = 2 then
   begin
     Index := GetCharacteristicIndex(tvGATTObjectsTree.Selected.Text);
-    if iplBLEClient1.CharacteristicSubscribed[Index] then
+    if iplBLEClient1.CheckCharacteristicSubscribed(Index) then
     begin
       iplBLEClient1.Unsubscribe(tvGATTObjectsTree.Selected.Parent.Text, tvGATTObjectsTree.Selected.Text);
       btnSubscribe.Caption := 'Subscribe';
@@ -486,7 +486,7 @@ begin
     tbFlags.Text := Flags;
     btnReadValue.Enabled := HasFlag(iplBLEClient1.CharacteristicFlags[Index], CHAR_FLAG_READ);
     btnSubscribe.Enabled := iplBLEClient1.CharacteristicCanSubscribe[Index];
-    if iplBLEClient1.CharacteristicSubscribed[Index] then
+    if iplBLEClient1.CheckCharacteristicSubscribed(Index) then
     begin
       btnSubscribe.Caption := 'Unsubscribe';
     end;
